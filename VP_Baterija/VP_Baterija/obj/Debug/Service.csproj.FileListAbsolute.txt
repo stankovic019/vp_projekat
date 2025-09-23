@@ -5,3 +5,6 @@ C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\VP_Baterija\bin\Debu
 C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\VP_Baterija\bin\Debug\VP_Baterija.pdb
 C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\VP_Baterija\obj\Debug\VP_Baterija.exe
 C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\VP_Baterija\obj\Debug\VP_Baterija.pdb
+C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\VP_Baterija\bin\Debug\Common.dll
+C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\VP_Baterija\bin\Debug\Common.pdb
+C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\VP_Baterija\obj\Debug\Service.csproj.Up2Date

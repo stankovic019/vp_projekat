@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -12,8 +13,12 @@ namespace VP_Baterija
         static void Main(string[] args)
         {
 
-            ServiceHost svc = new ServiceHost(typeof(BatteryService));
+            ServiceHost svc = new ServiceHost(typeof(EisService));
 
+            svc.Open();
+            Console.WriteLine("Service is running... Press Enter to stop.");
+            Console.ReadLine();
+            
         }
     }
 }

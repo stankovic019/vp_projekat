@@ -1,0 +1,6 @@
+C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Common\bin\Debug\Common.dll
+C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Common\bin\Debug\Common.pdb
+C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Common\obj\Debug\Common.dll
+C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Common\obj\Debug\Common.pdb

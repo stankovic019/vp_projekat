@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "VP_Baterija\Service.csproj", "{42D1827B-7F3C-4435-ADE3-5537F4B47B11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{C7F71300-90D0-412E-9E74-38CED9E0AC8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{B63827C7-BE54-4542-B428-FDA93B915D7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{42D1827B-7F3C-4435-ADE3-5537F4B47B11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42D1827B-7F3C-4435-ADE3-5537F4B47B11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42D1827B-7F3C-4435-ADE3-5537F4B47B11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42D1827B-7F3C-4435-ADE3-5537F4B47B11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7F71300-90D0-412E-9E74-38CED9E0AC8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7F71300-90D0-412E-9E74-38CED9E0AC8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7F71300-90D0-412E-9E74-38CED9E0AC8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7F71300-90D0-412E-9E74-38CED9E0AC8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B63827C7-BE54-4542-B428-FDA93B915D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B63827C7-BE54-4542-B428-FDA93B915D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B63827C7-BE54-4542-B428-FDA93B915D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B63827C7-BE54-4542-B428-FDA93B915D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {25C080B1-084B-46BF-A677-7DE643008370}
+	EndGlobalSection
+EndGlobal

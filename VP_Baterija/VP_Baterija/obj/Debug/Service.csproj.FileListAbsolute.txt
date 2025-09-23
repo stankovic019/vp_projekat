@@ -8,3 +8,14 @@ C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\VP_Baterija\obj\Debu
 C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\VP_Baterija\bin\Debug\Common.dll
 C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\VP_Baterija\bin\Debug\Common.pdb
 C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\VP_Baterija\obj\Debug\Service.csproj.Up2Date
+D:\Downloads\Github\vp_projekat\VP_Baterija\VP_Baterija\bin\Debug\VP_Baterija.exe.config
+D:\Downloads\Github\vp_projekat\VP_Baterija\VP_Baterija\bin\Debug\VP_Baterija.exe
+D:\Downloads\Github\vp_projekat\VP_Baterija\VP_Baterija\bin\Debug\VP_Baterija.pdb
+D:\Downloads\Github\vp_projekat\VP_Baterija\VP_Baterija\bin\Debug\Common.dll
+D:\Downloads\Github\vp_projekat\VP_Baterija\VP_Baterija\bin\Debug\Common.pdb
+D:\Downloads\Github\vp_projekat\VP_Baterija\VP_Baterija\obj\Debug\Service.csproj.AssemblyReference.cache
+D:\Downloads\Github\vp_projekat\VP_Baterija\VP_Baterija\obj\Debug\VP_Baterija.exe.config
+D:\Downloads\Github\vp_projekat\VP_Baterija\VP_Baterija\obj\Debug\Service.csproj.CoreCompileInputs.cache
+D:\Downloads\Github\vp_projekat\VP_Baterija\VP_Baterija\obj\Debug\Service.csproj.Up2Date
+D:\Downloads\Github\vp_projekat\VP_Baterija\VP_Baterija\obj\Debug\VP_Baterija.exe
+D:\Downloads\Github\vp_projekat\VP_Baterija\VP_Baterija\obj\Debug\VP_Baterija.pdb

@@ -14,15 +14,15 @@ namespace Common.Services
         [OperationContract]
         [FaultContract(typeof(DataFormatFault))]
         [FaultContract(typeof(ValidationFault))]
-        string StartSession(EisMeta meta);
+        void StartSession(EisMeta meta);
 
         [OperationContract]
         [FaultContract(typeof(DataFormatFault))]
         [FaultContract(typeof(ValidationFault))]
-        string PushSample(EisSample sample);
+        void PushSample(EisSample sample);
 
         [OperationContract]
-        string EndSession();
+        void EndSession();
 
     }
 }

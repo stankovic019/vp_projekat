@@ -13,5 +13,8 @@ namespace Common.Models
     {
         [DataMember] public string Message { get; set; }
         [DataMember] public string ValidationError { get; set; }
+        [DataMember] public string Field { get; set; }
+        [DataMember] public object ActualValue { get; set; }
+        [DataMember] public string AllowedRange { get; set; }
     }
 }

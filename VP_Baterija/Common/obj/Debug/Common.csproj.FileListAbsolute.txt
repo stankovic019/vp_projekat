@@ -4,3 +4,9 @@ C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Common\bin\Debug\Com
 C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Common\bin\Debug\Common.pdb
 C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Common\obj\Debug\Common.dll
 C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Common\obj\Debug\Common.pdb
+D:\Downloads\Github\vp_projekat\VP_Baterija\Common\bin\Debug\Common.dll
+D:\Downloads\Github\vp_projekat\VP_Baterija\Common\bin\Debug\Common.pdb
+D:\Downloads\Github\vp_projekat\VP_Baterija\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+D:\Downloads\Github\vp_projekat\VP_Baterija\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+D:\Downloads\Github\vp_projekat\VP_Baterija\Common\obj\Debug\Common.dll
+D:\Downloads\Github\vp_projekat\VP_Baterija\Common\obj\Debug\Common.pdb

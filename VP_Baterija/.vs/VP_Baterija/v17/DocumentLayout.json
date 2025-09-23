@@ -1,7 +1,36 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\",
-  "Documents": [],
+  "WorkspaceRootPath": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{42D1827B-7F3C-4435-ADE3-5537F4B47B11}|VP_Baterija\\Service.csproj|d:\\downloads\\github\\vp_projekat\\vp_baterija\\vp_baterija\\eisservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42D1827B-7F3C-4435-ADE3-5537F4B47B11}|VP_Baterija\\Service.csproj|solutionrelative:vp_baterija\\eisservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|d:\\downloads\\github\\vp_projekat\\vp_baterija\\common\\models\\eissample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\models\\eissample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|d:\\downloads\\github\\vp_projekat\\vp_baterija\\common\\services\\ieisservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\services\\ieisservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7F71300-90D0-412E-9E74-38CED9E0AC8C}|Client\\Client.csproj|d:\\downloads\\github\\vp_projekat\\vp_baterija\\client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C7F71300-90D0-412E-9E74-38CED9E0AC8C}|Client\\Client.csproj|solutionrelative:client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|d:\\downloads\\github\\vp_projekat\\vp_baterija\\common\\models\\eismeta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\models\\eismeta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|d:\\downloads\\github\\vp_projekat\\vp_baterija\\common\\models\\validationfault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\models\\validationfault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|d:\\downloads\\github\\vp_projekat\\vp_baterija\\common\\models\\dataformatfault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\models\\dataformatfault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -9,25 +38,98 @@
       "DocumentGroups": [
         {
           "DockedHeight": 284,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            }
-          ]
-        },
-        {
-          "DockedHeight": 52,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Client\\Program.cs",
+              "RelativeDocumentMoniker": "Client\\Program.cs",
+              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Client\\Program.cs",
+              "RelativeToolTip": "Client\\Program.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAD4vx4AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T18:28:43.573Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EisSample.cs",
+              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\EisSample.cs",
+              "RelativeDocumentMoniker": "Common\\Models\\EisSample.cs",
+              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\EisSample.cs",
+              "RelativeToolTip": "Common\\Models\\EisSample.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T18:26:18.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IEisService.cs",
+              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Services\\IEisService.cs",
+              "RelativeDocumentMoniker": "Common\\Services\\IEisService.cs",
+              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Services\\IEisService.cs",
+              "RelativeToolTip": "Common\\Services\\IEisService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T18:17:30.515Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EisService.cs",
+              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\VP_Baterija\\EisService.cs",
+              "RelativeDocumentMoniker": "VP_Baterija\\EisService.cs",
+              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\VP_Baterija\\EisService.cs",
+              "RelativeToolTip": "VP_Baterija\\EisService.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAWwDwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T18:15:52.768Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EisMeta.cs",
+              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\EisMeta.cs",
+              "RelativeDocumentMoniker": "Common\\Models\\EisMeta.cs",
+              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\EisMeta.cs",
+              "RelativeToolTip": "Common\\Models\\EisMeta.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T18:22:39.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DataFormatFault.cs",
+              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\DataFormatFault.cs",
+              "RelativeDocumentMoniker": "Common\\Models\\DataFormatFault.cs",
+              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\DataFormatFault.cs",
+              "RelativeToolTip": "Common\\Models\\DataFormatFault.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T18:14:27.604Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ValidationFault.cs",
+              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\ValidationFault.cs",
+              "RelativeDocumentMoniker": "Common\\Models\\ValidationFault.cs",
+              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\ValidationFault.cs",
+              "RelativeToolTip": "Common\\Models\\ValidationFault.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T18:14:14.414Z",
+              "EditorCaption": ""
             }
           ]
         }

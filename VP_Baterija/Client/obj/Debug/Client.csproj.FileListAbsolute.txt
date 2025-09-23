@@ -8,3 +8,14 @@ C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Client\bin\Debug\Com
 C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Client\obj\Debug\Client.csproj.Up2Date
 C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Client\obj\Debug\Client.exe
 C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Client\obj\Debug\Client.pdb
+D:\Downloads\Github\vp_projekat\VP_Baterija\Client\bin\Debug\Client.exe.config
+D:\Downloads\Github\vp_projekat\VP_Baterija\Client\bin\Debug\Client.exe
+D:\Downloads\Github\vp_projekat\VP_Baterija\Client\bin\Debug\Client.pdb
+D:\Downloads\Github\vp_projekat\VP_Baterija\Client\bin\Debug\Common.dll
+D:\Downloads\Github\vp_projekat\VP_Baterija\Client\bin\Debug\Common.pdb
+D:\Downloads\Github\vp_projekat\VP_Baterija\Client\obj\Debug\Client.csproj.AssemblyReference.cache
+D:\Downloads\Github\vp_projekat\VP_Baterija\Client\obj\Debug\Client.exe.config
+D:\Downloads\Github\vp_projekat\VP_Baterija\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+D:\Downloads\Github\vp_projekat\VP_Baterija\Client\obj\Debug\Client.csproj.Up2Date
+D:\Downloads\Github\vp_projekat\VP_Baterija\Client\obj\Debug\Client.exe
+D:\Downloads\Github\vp_projekat\VP_Baterija\Client\obj\Debug\Client.pdb

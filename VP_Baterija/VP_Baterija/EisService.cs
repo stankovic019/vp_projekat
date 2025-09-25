@@ -25,6 +25,7 @@ namespace VP_Baterija
         private StreamWriter _rejectsWriter;
         private string _sessionDirectory;
         private readonly string _dataRootPath = "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Common\\Data";
+        //private readonly string _dataRootPath = "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Data";
         private readonly string _rejectsFileName = "rejects.csv";
 
         private int _rejectedCount = 0; // broj reject-ovanih sampleova u ovoj sesiji
@@ -87,6 +88,8 @@ namespace VP_Baterija
                 WriteValidSample(sample);
 
                 Console.WriteLine($"ACK - Sample received: Row {sample.RowIndex}, Frequency: {sample.FrequencyHz} Hz - Status: IN_PROGRESS");
+
+                Console.WriteLine("Status: COMPLETED");
             }
             catch (FaultException<ValidationFault> ex)
             {
@@ -153,6 +156,7 @@ namespace VP_Baterija
                 _rejectsWriter = new StreamWriter(rejectsFilePath, false, Encoding.UTF8);
                 _rejectsWriter.WriteLine("FrequencyHz,R_ohm,X_ohm,V,T_degC,Range_ohm,RowIndex,RejectReason");
 
+                Console.WriteLine();
                 Console.WriteLine($"Session files created in: {_sessionDirectory}");
                 Console.WriteLine($"Session file: {sessionFilePath}");
                 Console.WriteLine($"Rejects file: {rejectsFilePath}");

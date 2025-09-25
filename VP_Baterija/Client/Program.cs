@@ -64,11 +64,7 @@ namespace Client
                         sample.RowIndex = i; // Ensure correct row index
 
                         client.PushSample(sample);
-
-                        if (i % 5 == 0) // Progress indicator
-                        {
-                            Console.WriteLine($"  Sent sample {i + 1}/{eisFile.Samples.Count}");
-                        }
+                        Console.WriteLine($"  Sent sample {i + 1}/{eisFile.Samples.Count}");
                     }
 
                     // End session

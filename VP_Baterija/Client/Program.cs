@@ -16,41 +16,91 @@ namespace Client
         {
             ChannelFactory<IEisService> factory = new ChannelFactory<IEisService>("EisService");
 
-            string datasetPath = @"D:\Downloads\Github\vp_projekat\VP_Baterija\Common\Files";
+            string datasetPath = @"C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Common\Files";
+            //string datasetPath = @"D:\Downloads\Github\vp_projekat\VP_Baterija\Common\Files";
 
             var processor = new EisFileProcessor(datasetPath);
-
             Console.WriteLine("Processing EIS files...");
             var eisFiles = processor.ProcessAllEisFiles();
 
-            // Ispis SUCCESS loga
-            Console.WriteLine("\n=== SUCCESS LOG ===");
-            foreach (var logEntry in processor.SuccessLog)
-            {
-                Console.WriteLine(logEntry);
-            }
+            // Display processing results
+            Console.WriteLine($"Successfully processed {eisFiles.Count} files locally");
 
-            // Ispis WARNING loga, ako postoji
             if (processor.WarningLog.Any())
             {
-                Console.WriteLine("\n=== WARNING LOG ===");
-                foreach (var logEntry in processor.WarningLog)
+                Console.WriteLine($"Warnings: {processor.WarningLog.Count}");
+            }
+
+            // NOW SEND DATA TO WCF SERVICE
+            Console.WriteLine("\n=== SENDING DATA TO SERVER ===");
+
+            var client = factory.CreateChannel();
+
+            try
+            {
+                // Send each file to the server
+                foreach (var eisFile in eisFiles) 
                 {
-                    Console.WriteLine(logEntry);
+                    Console.WriteLine($"\nSending {eisFile.BatteryId}/{eisFile.TestId}/{eisFile.SoCPercentage}%...");
+
+                    // Create metadata
+                    var meta = new EisMeta
+                    {
+                        BatteryId = eisFile.BatteryId,
+                        TestId = eisFile.TestId,
+                        SoC = eisFile.SoCPercentage,
+                        FileName = $"{eisFile.SoCPercentage}.csv",
+                        TotalRows = eisFile.Samples.Count
+                    };
+
+                    // Start session
+                    client.StartSession(meta);
+                    Console.WriteLine($"  Session started: {eisFile.Samples.Count} samples to send");
+
+                    // Send samples one by one
+                    for (int i = 0; i < eisFile.Samples.Count; i++)
+                    {
+                        var sample = eisFile.Samples[i];
+                        sample.RowIndex = i; // Ensure correct row index
+
+                        client.PushSample(sample);
+
+                        if (i % 5 == 0) // Progress indicator
+                        {
+                            Console.WriteLine($"  Sent sample {i + 1}/{eisFile.Samples.Count}");
+                        }
+                    }
+
+                    // End session
+                    client.EndSession();
+                    Console.WriteLine($"  ✓ Session completed for {eisFile.BatteryId}/{eisFile.TestId}/{eisFile.SoCPercentage}%");
+                }
+
+                Console.WriteLine("\n✓ All data sent to server successfully!");
+                Console.WriteLine("Check the server console and Data directory for created files.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error sending data to server: {ex.Message}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner exception: {ex.InnerException.Message}");
+                }
+            }
+            finally
+            {
+                try
+                {
+                    ((ICommunicationObject)client).Close();
+                    factory.Close();
+                }
+                catch
+                {
+                    // Ignore cleanup errors
                 }
             }
 
-            // Rezultati
-            Console.WriteLine($"\n=== RESULTS ===");
-            Console.WriteLine($"Successfully processed {eisFiles.Count} files");
-
-            // Prikaz prvih 5 fajlova (ili svih ako ih je manje)
-            foreach (var file in eisFiles.Take(5))
-            {
-                Console.WriteLine($"{file.BatteryId}/{file.TestId}/{file.SoCPercentage}% - {file.Samples.Count} samples");
-            }
-
-            Console.WriteLine("\nProcessing complete. Press any key to exit.");
+            Console.WriteLine("\nPress any key to exit.");
             Console.ReadKey();
         }
     }

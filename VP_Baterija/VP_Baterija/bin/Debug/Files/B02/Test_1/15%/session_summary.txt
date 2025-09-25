@@ -1,0 +1,11 @@
+Battery Analysis Session Summary
+Generated: 2025-09-25 18:45:44
+
+Battery ID: B02
+Test ID: Test_1
+State of Charge: 15%
+Original File: 15.csv
+
+Expected Samples: 28
+Processed Samples: 28
+Success Rate: 100.0%

@@ -149,7 +149,6 @@ public class EisFileProcessor
         {
             // Samo WARNING, NE dodajemo u SUCCESS
             AddWarning($"Expected {EXPECTED_ROWS_PER_FILE} rows but found {samples.Count} in {fileName}");
-            return null; // vrati null, fajl se neće dodati u uspešne
         }
 
         var eisFileData = new EisFileData

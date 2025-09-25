@@ -1,0 +1,3 @@
+﻿FrequencyHz,R_ohm,X_ohm,V,T_degC,Range_ohm,RowIndex,RejectReason
+810,0.0601725,-0.00451113,3.32675,20,0.3,28,"Exceeded allowed samples (28)"
+1000,0.0591844,-0.00389378,3.32674,20,0.3,29,"Exceeded allowed samples (28)"

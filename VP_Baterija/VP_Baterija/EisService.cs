@@ -6,17 +6,28 @@ using System.Threading.Tasks;
 using System.ServiceModel;
 using Common.Services;
 using Common.Models;
+using System.IO;
 
 namespace VP_Baterija
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class EisService : IEisService, IDisposable
     {
+        private const int MAX_ACCEPTED_SAMPLES = 28; // prihvatamo samo prvih 28 kao "success"
+
         private EisMeta _currentSessionMeta;
         private List<EisSample> _sessionSamples;
-        private int _expectedRowIndex = 0;
+        private int _expectedRowIndex = 0; // očekivani RowIndex za svaki dolazeći sample
         private bool _sessionActive = false;
         private bool _disposed = false;
+
+        private StreamWriter _sessionWriter;
+        private StreamWriter _rejectsWriter;
+        private string _sessionDirectory;
+        private readonly string _dataRootPath = "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Common\\Data";
+        private readonly string _rejectsFileName = "rejects.csv";
+
+        private int _rejectedCount = 0; // broj reject-ovanih sampleova u ovoj sesiji
 
         public EisService()
         {
@@ -36,8 +47,10 @@ namespace VP_Baterija
             _currentSessionMeta = meta;
             _sessionSamples.Clear();
             _expectedRowIndex = 0;
+            _rejectedCount = 0;
             _sessionActive = true;
 
+            SetupSessionFiles(meta);
             Console.WriteLine($"ACK - Session started for Battery: {meta.BatteryId}, Test: {meta.TestId}, SoC: {meta.SoC}% - Status: IN_PROGRESS");
         }
 
@@ -49,14 +62,56 @@ namespace VP_Baterija
                 throw new FaultException("No active session. Start session first.");
             }
 
-            ValidateSample(sample);
+            try
+            {
+                // validate incoming sample object and sequence *before* deciding accept/reject
+                ValidateSample(sample);
+                ValidateRowIndexSequence(sample.RowIndex);
 
-            ValidateRowIndexSequence(sample.RowIndex);
+                // nakon uspešne validacije redosleda, povećavamo očekivani indeks
+                _expectedRowIndex++;
 
-            _sessionSamples.Add(sample);
-            _expectedRowIndex++;
+                // ako smo već dostigli limit prihvata (MAX_ACCEPTED_SAMPLES), rejectujemo dodatne uzorke
+                if (_sessionSamples.Count >= MAX_ACCEPTED_SAMPLES)
+                {
+                    WriteRejectedSample(sample, $"Exceeded allowed samples ({MAX_ACCEPTED_SAMPLES})");
+                    _rejectedCount++;
+                    Console.WriteLine($"Sample {sample.RowIndex} rejected: Exceeded allowed samples ({MAX_ACCEPTED_SAMPLES})");
+                    return;
+                }
 
-            Console.WriteLine($"ACK - Sample received: Row {sample.RowIndex}, Frequency: {sample.FrequencyHz} Hz - Status: IN_PROGRESS");
+                // dodajemo u in-memory listu prihvaćenih
+                _sessionSamples.Add(sample);
+
+                // upis u session.csv
+                WriteValidSample(sample);
+
+                Console.WriteLine($"ACK - Sample received: Row {sample.RowIndex}, Frequency: {sample.FrequencyHz} Hz - Status: IN_PROGRESS");
+            }
+            catch (FaultException<ValidationFault> ex)
+            {
+                // validation fault -> loguj u rejects file (ako writer postoji) i re-throw ako želiš da klijent vidi grešku
+                WriteRejectedSample(sample, ex.Detail.Message);
+                _rejectedCount++;
+                // re-throw the validation fault so client can handle it if necessary
+                throw;
+            }
+            catch (FaultException)
+            {
+                // Generic FaultException (ne-smemo izgubiti podatke) - log and rethrow
+                WriteRejectedSample(sample, "FaultException during PushSample");
+                _rejectedCount++;
+                throw;
+            }
+            catch (Exception ex)
+            {
+                // Unexpected internal error - log to console and also to rejects if possible
+                WriteRejectedSample(sample, $"Server error: {ex.Message}");
+                _rejectedCount++;
+                Console.WriteLine($"Error in PushSample: {ex.Message}");
+                // throw a generic fault so client knows something went wrong
+                throw new FaultException($"Server error processing sample: {ex.Message}");
+            }
         }
 
         [OperationBehavior]
@@ -67,24 +122,156 @@ namespace VP_Baterija
                 throw new FaultException("No active session to end.");
             }
 
-            if (_sessionSamples.Count != _currentSessionMeta.TotalRows)
-            {
-                throw new FaultException<ValidationFault>(
-                    new ValidationFault
-                    {
-                        Message = "Received sample count doesn't match expected total rows",
-                        Field = "TotalRows",
-                        ActualValue = _sessionSamples.Count,
-                        AllowedRange = $"Expected: {_currentSessionMeta.TotalRows}"
-                    });
-            }
+            // Ne bacamo FaultException ako client je poslao više ili manje od meta.TotalRows.
+            // Umesto toga, finalizujemo fajlove i napišemo summary.
+            Console.WriteLine($"ACK - Session ending. Received samples: {_expectedRowIndex} (RowIndex count). Accepted (success) samples: {_sessionSamples.Count}. Rejected samples: {_rejectedCount}");
 
-            Console.WriteLine($"ACK - Session completed. Total samples: {_sessionSamples.Count} - Status: COMPLETED");
+            FinalizeSessionFiles();
 
             _sessionActive = false;
             _currentSessionMeta = null;
             _sessionSamples.Clear();
             _expectedRowIndex = 0;
+            _rejectedCount = 0;
+        }
+
+        private void SetupSessionFiles(EisMeta meta)
+        {
+            try
+            {
+                // Create directory structure: Data/<BatteryId>/<TestId>/<SoC%>/
+                _sessionDirectory = Path.Combine(_dataRootPath, meta.BatteryId, meta.TestId, $"{meta.SoC}%");
+                Directory.CreateDirectory(_sessionDirectory);
+
+                // Create session.csv file
+                string sessionFilePath = Path.Combine(_sessionDirectory, "session.csv");
+                _sessionWriter = new StreamWriter(sessionFilePath, false, Encoding.UTF8);
+                _sessionWriter.WriteLine("FrequencyHz,R_ohm,X_ohm,V,T_degC,Range_ohm,RowIndex");
+
+                // Create rejects.csv file
+                string rejectsFilePath = Path.Combine(_sessionDirectory, _rejectsFileName);
+                _rejectsWriter = new StreamWriter(rejectsFilePath, false, Encoding.UTF8);
+                _rejectsWriter.WriteLine("FrequencyHz,R_ohm,X_ohm,V,T_degC,Range_ohm,RowIndex,RejectReason");
+
+                Console.WriteLine($"Session files created in: {_sessionDirectory}");
+                Console.WriteLine($"Session file: {sessionFilePath}");
+                Console.WriteLine($"Rejects file: {rejectsFilePath}");
+            }
+            catch (Exception ex)
+            {
+                CleanupFileResources();
+                throw new FaultException($"Failed to create session files: {ex.Message}");
+            }
+        }
+
+        private void WriteValidSample(EisSample sample)
+        {
+            try
+            {
+                if (_sessionWriter != null && sample != null)
+                {
+                    string csvLine = $"{sample.FrequencyHz},{sample.R_ohm},{sample.X_ohm}," +
+                                   $"{sample.V},{sample.T_degC},{sample.Range_ohm},{sample.RowIndex}";
+                    _sessionWriter.WriteLine(csvLine);
+                    _sessionWriter.Flush();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Warning: Failed to write sample to file: {ex.Message}");
+            }
+        }
+
+        private void WriteRejectedSample(EisSample sample, string reason)
+        {
+            try
+            {
+                if (_rejectsWriter != null)
+                {
+                    // sample može biti null u nekim error situacijama; u tom slučaju napišemo minimalnu info liniju
+                    if (sample != null)
+                    {
+                        string csvLine = $"{sample.FrequencyHz},{sample.R_ohm},{sample.X_ohm}," +
+                                        $"{sample.V},{sample.T_degC},{sample.Range_ohm},{sample.RowIndex},\"{reason}\"";
+                        _rejectsWriter.WriteLine(csvLine);
+                    }
+                    else
+                    {
+                        // fallback zapis kad nemamo sample objekat
+                        string csvLine = $",,,,,,\",\"{reason}\"";
+                        _rejectsWriter.WriteLine(csvLine);
+                    }
+
+                    _rejectsWriter.Flush();
+
+                    Console.WriteLine($"Sample {(sample != null ? sample.RowIndex.ToString() : "<null>")} rejected and logged: {reason}");
+                }
+                else
+                {
+                    Console.WriteLine($"Reject attempted but rejectsWriter is null. Reason: {reason}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Warning: Failed to write rejected sample: {ex.Message}");
+            }
+        }
+
+        private void FinalizeSessionFiles()
+        {
+            try
+            {
+                // Write session summary
+                if (_sessionDirectory != null && _currentSessionMeta != null)
+                {
+                    string summaryPath = Path.Combine(_sessionDirectory, "session_summary.txt");
+                    using (var summaryWriter = new StreamWriter(summaryPath))
+                    {
+                        summaryWriter.WriteLine($"Battery Analysis Session Summary");
+                        summaryWriter.WriteLine($"Generated: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+                        summaryWriter.WriteLine();
+                        summaryWriter.WriteLine($"Battery ID: {_currentSessionMeta.BatteryId}");
+                        summaryWriter.WriteLine($"Test ID: {_currentSessionMeta.TestId}");
+                        summaryWriter.WriteLine($"State of Charge: {_currentSessionMeta.SoC}%");
+                        summaryWriter.WriteLine($"Original File: {_currentSessionMeta.FileName}");
+                        summaryWriter.WriteLine();
+                        summaryWriter.WriteLine($"Declared (client) Samples: {_currentSessionMeta.TotalRows}");
+                        summaryWriter.WriteLine($"Accepted (success) Samples: {_sessionSamples.Count}");
+                        summaryWriter.WriteLine($"Rejected Samples: {_rejectedCount}");
+                        double successRate = _currentSessionMeta.TotalRows > 0 ? (_sessionSamples.Count * 100.0 / _currentSessionMeta.TotalRows) : 0.0;
+                        summaryWriter.WriteLine($"Success Rate: {successRate:F1}%");
+                    }
+
+                    Console.WriteLine($"Session summary written to: {summaryPath}");
+                }
+
+                CleanupFileResources();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Warning: Error finalizing session files: {ex.Message}");
+                CleanupFileResources();
+            }
+        }
+
+        private void CleanupFileResources()
+        {
+            try
+            {
+                _sessionWriter?.Close();
+                _sessionWriter?.Dispose();
+                _sessionWriter = null;
+
+                _rejectsWriter?.Close();
+                _rejectsWriter?.Dispose();
+                _rejectsWriter = null;
+
+                _sessionDirectory = null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Warning: Error cleaning up file resources: {ex.Message}");
+            }
         }
 
         private void ValidateMetaData(EisMeta meta)
@@ -161,7 +348,7 @@ namespace VP_Baterija
                     });
             }
 
-            if (meta.TotalRows <= 0 || meta.TotalRows != 28)
+            if (meta.TotalRows <= 0)
             {
                 throw new FaultException<ValidationFault>(
                     new ValidationFault
@@ -169,7 +356,7 @@ namespace VP_Baterija
                         Message = "Invalid TotalRows count",
                         Field = "TotalRows",
                         ActualValue = meta.TotalRows,
-                        AllowedRange = "Expected: 28 rows"
+                        AllowedRange = "Expected: > 0"
                     });
             }
         }

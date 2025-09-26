@@ -44,10 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\VoltageSpikeDirection.cs" />
     <Compile Include="Events\SampleEventArgs.cs" />
     <Compile Include="Events\TransferEventArgs.cs" />
+    <Compile Include="Events\VoltageSpikeEventArgs.cs" />
     <Compile Include="Events\WarningEventArgs.cs" />
     <Compile Include="Models\DataFormatFault.cs" />
+    <Compile Include="Models\VoltageReading.cs" />
     <Compile Include="Services\AnalyticsConfiguration.cs" />
     <Compile Include="Services\EisCsvReader.cs" />
     <Compile Include="Services\EisCsvWriter.cs" />
@@ -61,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DisposableBase.cs" />
     <Compile Include="Services\IEisService.cs" />
+    <Compile Include="Services\VoltageAnalyzer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />

@@ -1,8 +1,10 @@
-﻿using Common.Models;
+﻿using Common.Events;
+using Common.Models;
 using Common.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,82 +21,85 @@ namespace Client
             string datasetPath = @"C:\Users\Dimitrije\Documents\GitHub\vp_projekat\VP_Baterija\Common\Files";
             //string datasetPath = @"D:\Downloads\Github\vp_projekat\VP_Baterija\Common\Files";
 
-            var processor = new EisFileProcessor(datasetPath);
-            Console.WriteLine("Processing EIS files...");
-            var eisFiles = processor.ProcessAllEisFiles();
+            //var processor = new EisFileProcessor(datasetPath);
+            //Console.WriteLine("Processing EIS files...");
+            //var eisFiles = processor.ProcessAllEisFiles();
 
-            // Display processing results
-            Console.WriteLine($"Successfully processed {eisFiles.Count} files locally");
+            //// Display processing results
+            //Console.WriteLine($"Successfully processed {eisFiles.Count} files locally");
 
-            if (processor.WarningLog.Any())
-            {
-                Console.WriteLine($"Warnings: {processor.WarningLog.Count}");
-            }
+            //if (processor.WarningLog.Any())
+            //{
+            //    Console.WriteLine($"Warnings: {processor.WarningLog.Count}");
+            //}
 
-            // NOW SEND DATA TO WCF SERVICE
-            Console.WriteLine("\n=== SENDING DATA TO SERVER ===");
+            //// NOW SEND DATA TO WCF SERVICE
+            //Console.WriteLine("\n=== SENDING DATA TO SERVER ===");
 
-            var client = factory.CreateChannel();
+            //var client = factory.CreateChannel();
 
-            try
-            {
-                // Send each file to the server
-                foreach (var eisFile in eisFiles)
-                {
-                    Console.WriteLine($"\nSending {eisFile.BatteryId}/{eisFile.TestId}/{eisFile.SoCPercentage}%...");
+            //try
+            //{
+            //    // Send each file to the server
+            //    foreach (var eisFile in eisFiles)
+            //    {
+            //        Console.WriteLine($"\nSending {eisFile.BatteryId}/{eisFile.TestId}/{eisFile.SoCPercentage}%...");
 
-                    // Create metadata
-                    var meta = new EisMeta
-                    {
-                        BatteryId = eisFile.BatteryId,
-                        TestId = eisFile.TestId,
-                        SoC = eisFile.SoCPercentage,
-                        FileName = $"{eisFile.SoCPercentage}.csv",
-                        TotalRows = eisFile.Samples.Count
-                    };
+            //        // Create metadata
+            //        var meta = new EisMeta
+            //        {
+            //            BatteryId = eisFile.BatteryId,
+            //            TestId = eisFile.TestId,
+            //            SoC = eisFile.SoCPercentage,
+            //            FileName = $"{eisFile.SoCPercentage}.csv",
+            //            TotalRows = eisFile.Samples.Count
+            //        };
 
-                    // Start session
-                    client.StartSession(meta);
-                    Console.WriteLine($"  Session started: {eisFile.Samples.Count} samples to send");
+            //        // Start session
+            //        client.StartSession(meta);
+            //        Console.WriteLine($"  Session started: {eisFile.Samples.Count} samples to send");
 
-                    // Send samples one by one
-                    for (int i = 0; i < eisFile.Samples.Count; i++)
-                    {
-                        var sample = eisFile.Samples[i];
-                        sample.RowIndex = i; // Ensure correct row index
+            //        // Send samples one by one
+            //        for (int i = 0; i < eisFile.Samples.Count; i++)
+            //        {
+            //            var sample = eisFile.Samples[i];
+            //            sample.RowIndex = i; // Ensure correct row index
 
-                        client.PushSample(sample);
-                        Console.WriteLine($"  Sent sample {i + 1}/{eisFile.Samples.Count}");
-                    }
+            //            client.PushSample(sample);
+            //            Console.WriteLine($"  Sent sample {i + 1}/{eisFile.Samples.Count}");
+            //        }
 
-                    // End session
-                    client.EndSession();
-                    Console.WriteLine($"  ✓ Session completed for {eisFile.BatteryId}/{eisFile.TestId}/{eisFile.SoCPercentage}%");
-                }
+            //        // End session
+            //        client.EndSession();
+            //        Console.WriteLine($"  ✓ Session completed for {eisFile.BatteryId}/{eisFile.TestId}/{eisFile.SoCPercentage}%");
+            //    }
 
-                Console.WriteLine("\n✓ All data sent to server successfully!");
-                Console.WriteLine("Check the server console and Data directory for created files.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error sending data to server: {ex.Message}");
-                if (ex.InnerException != null)
-                {
-                    Console.WriteLine($"Inner exception: {ex.InnerException.Message}");
-                }
-            }
-            finally
-            {
-                try
-                {
-                    ((ICommunicationObject)client).Close();
-                    factory.Close();
-                }
-                catch
-                {
-                    // Ignore cleanup errors
-                }
-            }
+            //    Console.WriteLine("\n✓ All data sent to server successfully!");
+            //    Console.WriteLine("Check the server console and Data directory for created files.");
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine($"Error sending data to server: {ex.Message}");
+            //    if (ex.InnerException != null)
+            //    {
+            //        Console.WriteLine($"Inner exception: {ex.InnerException.Message}");
+            //    }
+            //}
+            //finally
+            //{
+            //    try
+            //    {
+            //        ((ICommunicationObject)client).Close();
+            //        factory.Close();
+            //    }
+            //    catch
+            //    {
+            //        // Ignore cleanup errors
+            //    }
+            //}
+
+            RunVoltageAnalysisExample();
+            GenerateTestSamplesWithSpikes();
 
             Console.WriteLine("\nPress any key to exit.");
             Console.ReadKey();
@@ -141,6 +146,86 @@ namespace Client
             //    factory.Close();
             //    Console.ReadLine();
             //}
+        }
+
+        public static void RunVoltageAnalysisExample()
+        {
+            Console.WriteLine("=== Task 9: Voltage Change Detection Example ===\n");
+
+            // Create voltage analyzer
+            var voltageAnalyzer = new VoltageAnalyzer(0.002); // 2mV threshold
+
+            // Subscribe to voltage spike events
+            voltageAnalyzer.VoltageSpike += OnVoltageSpikeDetected;
+
+            // Create test data with voltage spikes
+            var testSamples = GenerateTestSamplesWithSpikes();
+            var sessionInfo = new EisMeta
+            {
+                BatteryId = "B01",
+                TestId = "Test_1",
+                SoC = 50,
+                FileName = "test_data.csv",
+                TotalRows = testSamples.Count
+            };
+
+            // Analyze complete session
+            Console.WriteLine("=== Batch Analysis ===");
+            voltageAnalyzer.AnalyzeVoltageChanges(testSamples, sessionInfo);
+
+            // Simulate real-time analysis
+            Console.WriteLine("\n=== Real-time Analysis Simulation ===");
+            voltageAnalyzer.ClearHistory();
+
+            foreach (var sample in testSamples)
+            {
+                voltageAnalyzer.AnalyzeSingleSample(sample, sessionInfo);
+                System.Threading.Thread.Sleep(100); // Simulate time between samples
+            }
+
+            Console.WriteLine("\n=== Analysis Complete ===");
+        }
+
+        private static void OnVoltageSpikeDetected(object sender, VoltageSpikeEventArgs e)
+        {
+            Console.WriteLine($"📧 Event subscriber notified of voltage spike:");
+            Console.WriteLine($"   |ΔV| = {e.AbsoluteDeltaV:F6}V > {e.Threshold:F6}V");
+            Console.WriteLine($"   Direction: {e.Direction}");
+
+            // Here you could log to file, send notifications, etc.
+        }
+
+        private static List<EisSample> GenerateTestSamplesWithSpikes()
+        {
+            var samples = new List<EisSample>();
+            var baseVoltage = 3.7;
+            var random = new Random(42); // Fixed seed for reproducible results
+
+            for (int i = 0; i < 10; i++)
+            {
+                var voltage = baseVoltage;
+
+                // Add normal variation
+                voltage += (random.NextDouble() - 0.5) * 0.001; // ±0.5mV normal variation
+
+                // Add spikes at specific samples
+                if (i == 3) voltage += 0.003; // 3mV spike up
+                if (i == 6) voltage -= 0.0025; // 2.5mV spike down
+                if (i == 8) voltage += 0.004; // 4mV spike up
+
+                samples.Add(new EisSample
+                {
+                    RowIndex = i,
+                    FrequencyHz = 1000.0 / (i + 1),
+                    R_ohm = 0.1 + i * 0.01,
+                    X_ohm = -0.05 - i * 0.005,
+                    V = voltage,
+                    T_degC = 25.0,
+                    Range_ohm = 1000.0
+                });
+            }
+
+            return samples;
         }
     }
 }

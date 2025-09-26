@@ -11,9 +11,9 @@ namespace Common.Models
     [DataContract]
     public class EisMeta
     {
-        [DataMember] public string BatteryId { get; set; }  // B01..B11
-        [DataMember] public string TestId { get; set; }     // Test_1 or Test_2
-        [DataMember] public int SoC { get; set; }           // SoC% from filename
+        [DataMember] public string BatteryId { get; set; } 
+        [DataMember] public string TestId { get; set; }    
+        [DataMember] public int SoC { get; set; }        
         [DataMember] public string FileName { get; set; }
         [DataMember] public int TotalRows { get; set; }
     }

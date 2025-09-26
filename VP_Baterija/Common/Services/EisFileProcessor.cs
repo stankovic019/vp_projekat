@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-// Task 5: File Operations and CSV Loading on Client
 public class EisFileProcessor
 {
     private readonly string _datasetPath;
@@ -37,11 +36,6 @@ public class EisFileProcessor
         _warningLog.Add($"WARNING: {message}");
     }
 
-    /// <summary>
-    /// Recursively processes all EIS CSV files in the dataset structure
-    /// Expected structure: Bxx/EIS Measurement/Test_y/
-    /// </summary>
-    /// <returns>List of processed EIS file data</returns>
     public List<EisFileData> ProcessAllEisFiles()
     {
         var eisFiles = new List<EisFileData>();
@@ -79,11 +73,9 @@ public class EisFileProcessor
     {
         var batteryId = Path.GetFileName(batteryDir);
 
-        // Look for EIS Measurement directory
         var eisMeasurementDir = Path.Combine(batteryDir, "EIS Measurement");
         if (!Directory.Exists(eisMeasurementDir))
         {
-            // Try alternative naming
             var eisDirs = Directory.GetDirectories(batteryDir).Where(dir => Path.GetFileName(dir).ToLower().Contains("eis")).FirstOrDefault();
 
             if (eisDirs != null)
@@ -95,7 +87,6 @@ public class EisFileProcessor
             }
         }
 
-        // Find test directories (Test_1, Test_2)
         var testDirectories = Directory.GetDirectories(eisMeasurementDir).Where(dir => IsTestDirectory(Path.GetFileName(dir))).OrderBy(dir => dir);
 
         foreach (var testDir in testDirectories)
@@ -108,7 +99,6 @@ public class EisFileProcessor
     {
         var testId = Path.GetFileName(testDir);
 
-        // Find all CSV files in test directory
         var csvFiles = Directory.GetFiles(testDir, "*.csv", SearchOption.TopDirectoryOnly);
 
         foreach (var csvFile in csvFiles)
@@ -147,7 +137,6 @@ public class EisFileProcessor
 
         if (samples.Count != EXPECTED_ROWS_PER_FILE)
         {
-            // Samo WARNING, NE dodajemo u SUCCESS
             AddWarning($"Expected {EXPECTED_ROWS_PER_FILE} rows but found {samples.Count} in {fileName}");
         }
 
@@ -162,22 +151,20 @@ public class EisFileProcessor
             TotalRows = samples.Count
         };
 
-        // Dodajemo u SUCCESS samo ako je broj redova tačan
         AddSuccess($"Processed {fileName} - {batteryId}/{testId}/{soc}% - {samples.Count} samples");
         return eisFileData;
     }
 
     private int? ExtractSoCFromFileName(string fileName)
     {
-        // Pattern to match SoC percentages: 5, 10, 15, ..., 100
-        // Looking for patterns like: filename_50_something.csv, filename50.csv, 50_filename.csv, etc.
+
         var patterns = new[]
         {
-            @"_(\d+)_",           // _50_
-            @"_(\d+)\.csv",       // _50.csv  
-            @"^(\d+)_",           // 50_filename
-            @"(\d+)\.csv$",       // filename50.csv
-            @"[^0-9](\d+)[^0-9]"  // any non-digit followed by digits followed by non-digit
+            @"_(\d+)_",          
+            @"_(\d+)\.csv",       
+            @"^(\d+)_",           
+            @"(\d+)\.csv$",       
+            @"[^0-9](\d+)[^0-9]" 
         };
 
         foreach (var pattern in patterns)
@@ -185,7 +172,6 @@ public class EisFileProcessor
             var match = Regex.Match(fileName, pattern, RegexOptions.IgnoreCase);
             if (match.Success && int.TryParse(match.Groups[1].Value, out int soc))
             {
-                // Validate that it's a valid SoC percentage (5, 10, 15, ..., 100)
                 if (soc >= 5 && soc <= 100 && soc % 5 == 0)
                 {
                     return soc;
@@ -247,16 +233,15 @@ public class EisFileProcessor
 
         try
         {
-            // Split by comma and trim whitespace
+
             var fields = line.Split(',').Select(f => f.Trim()).ToArray();
 
-            // Expected format: FrequencyHz, R_ohm, X_ohm, V, T_degC, Range_ohm
+
             if (fields.Length < 6)
             {
                 return null;
             }
 
-            // Parse using invariant culture (dot as decimal separator)
             var sample = new EisSample
             {
                 FrequencyHz = ParseDouble(fields[0], "FrequencyHz"),
@@ -268,7 +253,6 @@ public class EisFileProcessor
                 RowIndex = rowIndex
             };
 
-            // Basic validation
             if (sample.FrequencyHz <= 0)
                 return null;
 
@@ -282,7 +266,6 @@ public class EisFileProcessor
 
     private double ParseDouble(string value, string fieldName)
     {
-        // Use invariant culture for parsing (dot as decimal separator)
         if (double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out double result))
         {
             return result;
@@ -296,7 +279,6 @@ public class EisFileProcessor
         if (string.IsNullOrWhiteSpace(line))
             return false;
 
-        // Check if line contains typical header keywords
         var lowerLine = line.ToLower();
         return lowerLine.Contains("frequency") ||
                lowerLine.Contains("impedance") ||
@@ -307,13 +289,13 @@ public class EisFileProcessor
 
     private bool IsBatteryDirectory(string dirName)
     {
-        // Match B01, B02, ..., B11 pattern
+
         return Regex.IsMatch(dirName, @"^B\d{2}$", RegexOptions.IgnoreCase);
     }
 
     private bool IsTestDirectory(string dirName)
     {
-        // Match Test_1, Test_2 pattern
+
         return Regex.IsMatch(dirName, @"^Test_[12]$", RegexOptions.IgnoreCase);
     }
 
@@ -333,7 +315,7 @@ public class EisFileProcessor
 
         foreach (var item in summary)
         {
-            // Formatiramo svaki SoC sa procentom
+
             var socWithPercent = item.SoCLevels.Select(s => $"{s}%");
             _successLog.Add($"{item.Battery}: {item.Files} files, {item.Tests} tests, SoC levels: {string.Join(", ", socWithPercent)}");
         }

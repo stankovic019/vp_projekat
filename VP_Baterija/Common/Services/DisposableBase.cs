@@ -22,11 +22,8 @@ namespace Common.Services
             {
                 if (disposing)
                 {
-                    // Dispose managed resources
                     DisposeManagedResources();
                 }
-
-                // Dispose unmanaged resources
                 DisposeUnmanagedResources();
                 disposed = true;
             }

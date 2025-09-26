@@ -44,14 +44,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\ImpedanceJumpDirection.cs" />
+    <Compile Include="Enums\OutOfBandDirection.cs" />
     <Compile Include="Enums\VoltageSpikeDirection.cs" />
+    <Compile Include="Events\ImpedanceJumpEventArgs.cs" />
+    <Compile Include="Events\OutOfBandWarningEventArgs.cs" />
     <Compile Include="Events\SampleEventArgs.cs" />
     <Compile Include="Events\TransferEventArgs.cs" />
     <Compile Include="Events\VoltageSpikeEventArgs.cs" />
     <Compile Include="Events\WarningEventArgs.cs" />
     <Compile Include="Models\DataFormatFault.cs" />
+    <Compile Include="Models\ImpedanceReading.cs" />
     <Compile Include="Models\VoltageReading.cs" />
     <Compile Include="Services\AnalyticsConfiguration.cs" />
+    <Compile Include="Services\ImpedanceAnalyzer.cs" />
     <Compile Include="Services\EisCsvReader.cs" />
     <Compile Include="Services\EisCsvWriter.cs" />
     <Compile Include="Models\EisFileData.cs" />

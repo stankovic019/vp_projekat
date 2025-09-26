@@ -30,7 +30,6 @@ namespace Common.Models
             }
             catch
             {
-                // Clean up if initialization fails
                 streamReader?.Dispose();
                 fileStream?.Dispose();
                 throw;

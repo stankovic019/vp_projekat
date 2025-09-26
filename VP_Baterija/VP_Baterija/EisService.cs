@@ -14,11 +14,11 @@ namespace VP_Baterija
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class EisService : IEisService, IDisposable, IBatteryEventPublisher
     {
-        private const int MAX_ACCEPTED_SAMPLES = 28; // prihvatamo samo prvih 28 kao "success"
+        private const int MAX_ACCEPTED_SAMPLES = 28; 
 
         private EisMeta _currentSessionMeta;
         private List<EisSample> _sessionSamples;
-        private int _expectedRowIndex = 0; // očekivani RowIndex za svaki dolazeći sample
+        private int _expectedRowIndex = 0; 
         private bool _sessionActive = false;
         private bool _disposed = false;
 
@@ -34,7 +34,7 @@ namespace VP_Baterija
         public event EventHandler<TransferEventArgs> OnTransferCompleted;
         public event EventHandler<WarningEventArgs> OnWarningRaised;
 
-        private int _rejectedCount = 0; // broj reject-ovanih sampleova u ovoj sesiji
+        private int _rejectedCount = 0; 
 
         private readonly AnalyticsConfiguration _config;
 
@@ -107,14 +107,11 @@ namespace VP_Baterija
 
             try
             {
-                // validate incoming sample object and sequence *before* deciding accept/reject
                 ValidateSample(sample);
                 ValidateRowIndexSequence(sample.RowIndex);
 
-                // nakon uspešne validacije redosleda, povećavamo očekivani indeks
                 _expectedRowIndex++;
 
-                // ako smo već dostigli limit prihvata (MAX_ACCEPTED_SAMPLES), rejectujemo dodatne uzorke
                 if (_sessionSamples.Count >= MAX_ACCEPTED_SAMPLES)
                 {
                     WriteRejectedSample(sample, $"Exceeded allowed samples ({MAX_ACCEPTED_SAMPLES})");
@@ -123,10 +120,8 @@ namespace VP_Baterija
                     return;
                 }
 
-                // dodajemo u in-memory listu prihvaćenih
                 _sessionSamples.Add(sample);
 
-                // upis u session.csv
                 WriteValidSample(sample);
                 OnSampleReceived?.Invoke(this, new SampleEventArgs
                 {
@@ -141,7 +136,6 @@ namespace VP_Baterija
             }
             catch (FaultException<ValidationFault> ex)
             {
-                // validation fault -> loguj u rejects file (ako writer postoji) i re-throw ako želiš da klijent vidi grešku
                 WriteRejectedSample(sample, ex.Detail.Message);
                 _rejectedCount++;
                 OnWarningRaised?.Invoke(this, new WarningEventArgs
@@ -154,23 +148,20 @@ namespace VP_Baterija
                     Timestamp = DateTime.Now
                 });
 
-                // re-throw the validation fault so client can handle it if necessary
                 throw;
             }
             catch (FaultException)
             {
-                // Generic FaultException (ne-smemo izgubiti podatke) - log and rethrow
                 WriteRejectedSample(sample, "FaultException during PushSample");
                 _rejectedCount++;
                 throw;
             }
             catch (Exception ex)
             {
-                // Unexpected internal error - log to console and also to rejects if possible
                 WriteRejectedSample(sample, $"Server error: {ex.Message}");
                 _rejectedCount++;
                 Console.WriteLine($"Error in PushSample: {ex.Message}");
-                // throw a generic fault so client knows something went wrong
+
                 throw new FaultException($"Server error processing sample: {ex.Message}");
             }
         }
@@ -183,8 +174,6 @@ namespace VP_Baterija
                 throw new FaultException("No active session to end.");
             }
 
-            // Ne bacamo FaultException ako client je poslao više ili manje od meta.TotalRows.
-            // Umesto toga, finalizujemo fajlove i napišemo summary.
             Console.WriteLine($"ACK - Session ending. Received samples: {_expectedRowIndex} (RowIndex count). Accepted (success) samples: {_sessionSamples.Count}. Rejected samples: {_rejectedCount}");
 
             FinalizeSessionFiles();
@@ -207,16 +196,15 @@ namespace VP_Baterija
         {
             try
             {
-                // Create directory structure: Data/<BatteryId>/<TestId>/<SoC%>/
+
                 _sessionDirectory = Path.Combine(_dataRootPath, meta.BatteryId, meta.TestId, $"{meta.SoC}%");
                 Directory.CreateDirectory(_sessionDirectory);
 
-                // Create session.csv file
                 string sessionFilePath = Path.Combine(_sessionDirectory, "session.csv");
                 _sessionWriter = new StreamWriter(sessionFilePath, false, Encoding.UTF8);
                 _sessionWriter.WriteLine("FrequencyHz,R_ohm,X_ohm,V,T_degC,Range_ohm,RowIndex");
 
-                // Create rejects.csv file
+
                 string rejectsFilePath = Path.Combine(_sessionDirectory, _rejectsFileName);
                 _rejectsWriter = new StreamWriter(rejectsFilePath, false, Encoding.UTF8);
                 _rejectsWriter.WriteLine("FrequencyHz,R_ohm,X_ohm,V,T_degC,Range_ohm,RowIndex,RejectReason");
@@ -257,7 +245,6 @@ namespace VP_Baterija
             {
                 if (_rejectsWriter != null)
                 {
-                    // sample može biti null u nekim error situacijama; u tom slučaju napišemo minimalnu info liniju
                     if (sample != null)
                     {
                         string csvLine = $"{sample.FrequencyHz},{sample.R_ohm},{sample.X_ohm}," +
@@ -266,7 +253,7 @@ namespace VP_Baterija
                     }
                     else
                     {
-                        // fallback zapis kad nemamo sample objekat
+
                         string csvLine = $",,,,,,\",\"{reason}\"";
                         _rejectsWriter.WriteLine(csvLine);
                     }
@@ -290,7 +277,6 @@ namespace VP_Baterija
         {
             try
             {
-                // Write session summary
                 if (_sessionDirectory != null && _currentSessionMeta != null)
                 {
                     string summaryPath = Path.Combine(_sessionDirectory, "session_summary.txt");

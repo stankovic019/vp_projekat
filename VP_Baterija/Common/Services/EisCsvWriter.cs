@@ -21,7 +21,6 @@ namespace Common.Models
         {
             try
             {
-                // Ensure directory exists
                 Directory.CreateDirectory(Path.GetDirectoryName(filePath));
 
                 fileStream = new FileStream(filePath,
@@ -32,7 +31,6 @@ namespace Common.Models
             }
             catch
             {
-                // Clean up if initialization fails
                 streamWriter?.Dispose();
                 fileStream?.Dispose();
                 throw;
@@ -43,7 +41,7 @@ namespace Common.Models
         {
             ThrowIfDisposed();
             streamWriter?.WriteLine(line);
-            streamWriter?.Flush(); // Ensure data is written
+            streamWriter?.Flush(); 
         }
 
         public void WriteEisSample(EisSample sample)

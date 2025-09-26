@@ -98,11 +98,11 @@ namespace Client
             //    }
             //}
 
-            RunVoltageAnalysisExample();
-            GenerateTestSamplesWithSpikes();
+            //RunVoltageAnalysisExample();
+            //GenerateTestSamplesWithSpikes();
 
-            Console.WriteLine("\nPress any key to exit.");
-            Console.ReadKey();
+            //Console.WriteLine("\nPress any key to exit.");
+            //Console.ReadKey();
             //    try
             //    {
             //        // Test with valid session
@@ -146,7 +146,105 @@ namespace Client
             //    factory.Close();
             //    Console.ReadLine();
             //}
+            RunImpedanceAnalysisExample();
+            GenerateTestSamplesWithImpedanceVariations();
+
         }
+
+
+        public static void RunImpedanceAnalysisExample()
+        {
+            Console.WriteLine("=== Task 10: Impedance Analysis Example ===\n");
+
+            // Create impedance analyzer
+            var impedanceAnalyzer = new ImpedanceAnalyzer(0.005); // 5mΩ threshold
+
+            // Subscribe to events
+            impedanceAnalyzer.ImpedanceJump += OnImpedanceJumpDetected;
+            impedanceAnalyzer.OutOfBandWarning += OnOutOfBandWarningDetected;
+
+            // Create test data with impedance variations
+            var testSamples = GenerateTestSamplesWithImpedanceVariations();
+            var sessionInfo = new EisMeta
+            {
+                BatteryId = "B01",
+                TestId = "Test_1",
+                SoC = 75,
+                FileName = "test_impedance.csv",
+                TotalRows = testSamples.Count
+            };
+
+            // Analyze complete session
+            Console.WriteLine("=== Batch Impedance Analysis ===");
+            impedanceAnalyzer.AnalyzeImpedanceChanges(testSamples, sessionInfo);
+
+            // Simulate real-time analysis
+            Console.WriteLine("\n=== Real-time Impedance Analysis Simulation ===");
+            impedanceAnalyzer.ClearHistory();
+
+            foreach (var sample in testSamples)
+            {
+                impedanceAnalyzer.AnalyzeSingleSample(sample, sessionInfo);
+                System.Threading.Thread.Sleep(150); // Simulate time between samples
+            }
+
+            Console.WriteLine($"\n=== Final Running Mean: {impedanceAnalyzer.GetCurrentRunningMean():F6}Ω ===");
+            Console.WriteLine("=== Impedance Analysis Complete ===");
+        }
+
+        private static void OnImpedanceJumpDetected(object sender, ImpedanceJumpEventArgs e)
+        {
+            Console.WriteLine($"📧 Event subscriber notified of impedance jump:");
+            Console.WriteLine($"   |ΔZ| = {e.AbsoluteDeltaZ:F8}Ω > {e.Threshold:F8}Ω");
+            Console.WriteLine($"   Direction: {e.Direction}");
+        }
+
+        private static void OnOutOfBandWarningDetected(object sender, OutOfBandWarningEventArgs e)
+        {
+            Console.WriteLine($"📧 Event subscriber notified of out-of-band condition:");
+            Console.WriteLine($"   Z = {e.CurrentZ:F6}Ω is {e.Direction}");
+            Console.WriteLine($"   Deviation: {e.DeviationPercent:F2}% beyond ±25% range");
+        }
+
+        private static List<EisSample> GenerateTestSamplesWithImpedanceVariations()
+        {
+            var samples = new List<EisSample>();
+            var random = new Random(42);
+
+            for (int i = 0; i < 12; i++)
+            {
+                var baseR = 0.1;
+                var baseX = -0.05;
+
+                // Add normal variations
+                var R = baseR + (random.NextDouble() - 0.5) * 0.002; // ±1mΩ variation
+                var X = baseX + (random.NextDouble() - 0.5) * 0.001; // ±0.5mΩ variation
+
+                // Add impedance jumps at specific samples
+                if (i == 4) { R += 0.008; X -= 0.004; } // Jump
+                if (i == 7) { R -= 0.006; X += 0.003; } // Jump
+                if (i == 10) { R += 0.012; X -= 0.006; } // Large jump + out-of-band
+
+                // Add out-of-band values
+                if (i == 8) { R *= 1.4; X *= 1.3; } // +40% and +30% - should trigger out-of-band
+                if (i == 9) { R *= 0.6; X *= 0.7; } // -40% and -30% - should trigger out-of-band
+
+                samples.Add(new EisSample
+                {
+                    RowIndex = i,
+                    FrequencyHz = 10000.0 / (i + 1),
+                    R_ohm = R,
+                    X_ohm = X,
+                    V = 3.7 + (random.NextDouble() - 0.5) * 0.001,
+                    T_degC = 25.0 + (random.NextDouble() - 0.5) * 2.0,
+                    Range_ohm = 1000.0
+                });
+            }
+
+            return samples;
+        }
+
+        //
 
         public static void RunVoltageAnalysisExample()
         {

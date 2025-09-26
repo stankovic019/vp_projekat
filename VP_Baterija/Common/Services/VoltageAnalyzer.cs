@@ -15,12 +15,12 @@ namespace Common.Services
         private readonly double _voltageThreshold;
         private readonly List<VoltageReading> _voltageHistory;
 
-        // Events for voltage spike detection
+
         public event EventHandler<VoltageSpikeEventArgs> VoltageSpike;
 
         public VoltageAnalyzer()
         {
-            // Read threshold from configuration
+
             _voltageThreshold = ReadVoltageThresholdFromConfig();
             _voltageHistory = new List<VoltageReading>();
 
@@ -35,11 +35,6 @@ namespace Common.Services
             Console.WriteLine($"VoltageAnalyzer initialized with custom threshold: {_voltageThreshold}V");
         }
 
-        /// <summary>
-        /// Analyzes voltage changes for consecutive samples within the same SoC level
-        /// </summary>
-        /// <param name="samples">EIS samples from the same CSV file (same SoC)</param>
-        /// <param name="sessionInfo">Session metadata for context</param>
         public void AnalyzeVoltageChanges(List<EisSample> samples, EisMeta sessionInfo)
         {
             if (samples == null || samples.Count < 2)
@@ -51,10 +46,8 @@ namespace Common.Services
             Console.WriteLine($"\n=== Voltage Analysis for {sessionInfo.BatteryId}/{sessionInfo.TestId}/{sessionInfo.SoC}% ===");
             Console.WriteLine($"Analyzing {samples.Count} samples with threshold: {_voltageThreshold}V");
 
-            // Clear previous history for new session
             _voltageHistory.Clear();
 
-            // Sort samples by RowIndex to ensure correct sequence
             var sortedSamples = samples.OrderBy(s => s.RowIndex).ToList();
 
             for (int i = 0; i < sortedSamples.Count; i++)
@@ -71,7 +64,6 @@ namespace Common.Services
 
                 _voltageHistory.Add(currentReading);
 
-                // Calculate ΔV for consecutive samples (n and n-1)
                 if (i > 0)
                 {
                     var previousSample = sortedSamples[i - 1];
@@ -81,7 +73,6 @@ namespace Common.Services
                     Console.WriteLine($"Sample {currentSample.RowIndex}: V={currentSample.V:F4}V, " +
                                     $"ΔV={deltaV:F6}V (|ΔV|={absoluteDeltaV:F6}V)");
 
-                    // Check if voltage change exceeds threshold
                     if (absoluteDeltaV > _voltageThreshold)
                     {
                         var spikeDirection = DetermineSpikeDirection(deltaV);
@@ -97,7 +88,6 @@ namespace Common.Services
                             DetectedAt = DateTime.Now
                         };
 
-                        // Raise voltage spike event
                         OnVoltageSpike(eventArgs);
                     }
                 }
@@ -107,16 +97,9 @@ namespace Common.Services
                 }
             }
 
-            // Summary statistics
             LogVoltageSummary(sortedSamples, sessionInfo);
         }
 
-        /// <summary>
-        /// Analyzes single sample against the most recent previous sample
-        /// Used for real-time analysis during streaming
-        /// </summary>
-        /// <param name="sample">Current EIS sample</param>
-        /// <param name="sessionInfo">Session metadata</param>
         public void AnalyzeSingleSample(EisSample sample, EisMeta sessionInfo)
         {
             var currentReading = new VoltageReading
@@ -128,7 +111,6 @@ namespace Common.Services
                 SessionInfo = sessionInfo
             };
 
-            // Check against previous sample in the same session
             var previousReading = _voltageHistory.LastOrDefault(r =>
                 r.SessionInfo.BatteryId == sessionInfo.BatteryId &&
                 r.SessionInfo.TestId == sessionInfo.TestId &&
@@ -186,7 +168,6 @@ namespace Common.Services
             Console.WriteLine($"Detected at: {e.DetectedAt:HH:mm:ss.fff}");
             Console.WriteLine();
 
-            // Raise the event for subscribers
             VoltageSpike?.Invoke(this, e);
         }
 
@@ -217,7 +198,6 @@ namespace Common.Services
         {
             try
             {
-                // Try to read from app.config
                 var configValue = ConfigurationManager.AppSettings["V_threshold"];
                 if (configValue != null && double.TryParse(configValue, out double threshold))
                 {
@@ -229,8 +209,7 @@ namespace Common.Services
                 Console.WriteLine($"Warning: Could not read V_threshold from config: {ex.Message}");
             }
 
-            // Default threshold if config is not available
-            return 0.001; // 1mV default threshold
+            return 0.001; 
         }
 
         public void ClearHistory()

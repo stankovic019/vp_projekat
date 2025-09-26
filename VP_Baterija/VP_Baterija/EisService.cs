@@ -7,11 +7,12 @@ using System.ServiceModel;
 using Common.Services;
 using Common.Models;
 using System.IO;
+using Common.Events;
 
 namespace VP_Baterija
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
-    public class EisService : IEisService, IDisposable
+    public class EisService : IEisService, IDisposable, IBatteryEventPublisher
     {
         private const int MAX_ACCEPTED_SAMPLES = 28; // prihvatamo samo prvih 28 kao "success"
 
@@ -28,11 +29,44 @@ namespace VP_Baterija
         //private readonly string _dataRootPath = "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Data";
         private readonly string _rejectsFileName = "rejects.csv";
 
+        public event EventHandler<TransferEventArgs> OnTransferStarted;
+        public event EventHandler<SampleEventArgs> OnSampleReceived;
+        public event EventHandler<TransferEventArgs> OnTransferCompleted;
+        public event EventHandler<WarningEventArgs> OnWarningRaised;
+
         private int _rejectedCount = 0; // broj reject-ovanih sampleova u ovoj sesiji
+
+        private readonly AnalyticsConfiguration _config;
+
 
         public EisService()
         {
             _sessionSamples = new List<EisSample>();
+            _config = AnalyticsConfiguration.LoadFromConfig();
+            SubscribeToEvents();
+        }
+
+        private void SubscribeToEvents()
+        {
+            OnTransferStarted += (sender, e) =>
+            {
+                Console.WriteLine($"[EVENT] Transfer started: {e.BatteryId}/{e.TestId}/{e.SoC}% at {e.Timestamp:HH:mm:ss}");
+            };
+
+            OnSampleReceived += (sender, e) =>
+            {
+                Console.WriteLine($"[EVENT] Sample {e.SampleNumber}/{e.TotalSamples} received at {e.Timestamp:HH:mm:ss}");
+            };
+
+            OnTransferCompleted += (sender, e) =>
+            {
+                Console.WriteLine($"[EVENT] Transfer completed: {e.BatteryId}/{e.TestId}/{e.SoC}% - {e.TotalSamples} samples at {e.Timestamp:HH:mm:ss}");
+            };
+
+            OnWarningRaised += (sender, e) =>
+            {
+                Console.WriteLine($"[WARNING] {e.WarningType}: {e.Message} (Value: {e.ActualValue}, Threshold: {e.ThresholdValue}) at {e.Timestamp:HH:mm:ss}");
+            };
         }
 
         [OperationBehavior]
@@ -52,6 +86,14 @@ namespace VP_Baterija
             _sessionActive = true;
 
             SetupSessionFiles(meta);
+            OnTransferStarted?.Invoke(this, new TransferEventArgs
+            {
+                BatteryId = meta.BatteryId,
+                TestId = meta.TestId,
+                SoC = meta.SoC,
+                TotalSamples = meta.TotalRows,
+                Timestamp = DateTime.Now
+            });
             Console.WriteLine($"ACK - Session started for Battery: {meta.BatteryId}, Test: {meta.TestId}, SoC: {meta.SoC}% - Status: IN_PROGRESS");
         }
 
@@ -86,7 +128,13 @@ namespace VP_Baterija
 
                 // upis u session.csv
                 WriteValidSample(sample);
-
+                OnSampleReceived?.Invoke(this, new SampleEventArgs
+                {
+                    Sample = sample,
+                    SampleNumber = _expectedRowIndex,
+                    TotalSamples = _currentSessionMeta.TotalRows,
+                    Timestamp = DateTime.Now
+                });
                 Console.WriteLine($"ACK - Sample received: Row {sample.RowIndex}, Frequency: {sample.FrequencyHz} Hz - Status: IN_PROGRESS");
 
                 Console.WriteLine("Status: COMPLETED");
@@ -96,6 +144,16 @@ namespace VP_Baterija
                 // validation fault -> loguj u rejects file (ako writer postoji) i re-throw ako želiš da klijent vidi grešku
                 WriteRejectedSample(sample, ex.Detail.Message);
                 _rejectedCount++;
+                OnWarningRaised?.Invoke(this, new WarningEventArgs
+                {
+                    WarningType = "ValidationError",
+                    Message = ex.Detail.Message,
+                    Sample = sample,
+                    ActualValue = 0,
+                    ThresholdValue = 0,
+                    Timestamp = DateTime.Now
+                });
+
                 // re-throw the validation fault so client can handle it if necessary
                 throw;
             }
@@ -130,7 +188,14 @@ namespace VP_Baterija
             Console.WriteLine($"ACK - Session ending. Received samples: {_expectedRowIndex} (RowIndex count). Accepted (success) samples: {_sessionSamples.Count}. Rejected samples: {_rejectedCount}");
 
             FinalizeSessionFiles();
-
+            OnTransferCompleted?.Invoke(this, new TransferEventArgs
+            {
+                BatteryId = _currentSessionMeta.BatteryId,
+                TestId = _currentSessionMeta.TestId,
+                SoC = _currentSessionMeta.SoC,
+                TotalSamples = _sessionSamples.Count,
+                Timestamp = DateTime.Now
+            });
             _sessionActive = false;
             _currentSessionMeta = null;
             _sessionSamples.Clear();

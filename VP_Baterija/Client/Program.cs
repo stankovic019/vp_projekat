@@ -39,7 +39,7 @@ namespace Client
             try
             {
                 // Send each file to the server
-                foreach (var eisFile in eisFiles) 
+                foreach (var eisFile in eisFiles)
                 {
                     Console.WriteLine($"\nSending {eisFile.BatteryId}/{eisFile.TestId}/{eisFile.SoCPercentage}%...");
 
@@ -98,6 +98,49 @@ namespace Client
 
             Console.WriteLine("\nPress any key to exit.");
             Console.ReadKey();
+            //    try
+            //    {
+            //        // Test with valid session
+            //        var meta = new EisMeta
+            //        {
+            //            BatteryId = "B01",
+            //            TestId = "Test_1",
+            //            SoC = 50,
+            //            FileName = "test.csv",
+            //            TotalRows = 3
+            //        };
+
+            //        Console.WriteLine("=== Testing Events ===");
+            //        client.StartSession(meta);
+
+            //        // Send samples
+            //        for (int i = 0; i < 3; i++)
+            //        {
+            //            var sample = new EisSample
+            //            {
+            //                FrequencyHz = 1000 * (i + 1),
+            //                R_ohm = 0.5,
+            //                X_ohm = 0.3,
+            //                V = 3.7,
+            //                T_degC = 25,
+            //                Range_ohm = 1.0,
+            //                RowIndex = i
+            //            };
+
+            //            client.PushSample(sample);
+            //            System.Threading.Thread.Sleep(500); // Delay to see events
+            //        }
+
+            //        client.EndSession();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine($"Error: {ex.Message}");
+            //    }
+
+            //    factory.Close();
+            //    Console.ReadLine();
+            //}
         }
     }
 }

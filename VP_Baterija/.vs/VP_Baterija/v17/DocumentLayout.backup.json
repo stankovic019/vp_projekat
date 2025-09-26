@@ -1,46 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\",
+  "WorkspaceRootPath": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C7F71300-90D0-412E-9E74-38CED9E0AC8C}|Client\\Client.csproj|D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C7F71300-90D0-412E-9E74-38CED9E0AC8C}|Client\\Client.csproj|C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C7F71300-90D0-412E-9E74-38CED9E0AC8C}|Client\\Client.csproj|solutionrelative:client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42D1827B-7F3C-4435-ADE3-5537F4B47B11}|VP_Baterija\\Service.csproj|d:\\downloads\\github\\vp_projekat\\vp_baterija\\vp_baterija\\eisservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{42D1827B-7F3C-4435-ADE3-5537F4B47B11}|VP_Baterija\\Service.csproj|c:\\users\\dimitrije\\documents\\github\\vp_projekat\\vp_baterija\\vp_baterija\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{42D1827B-7F3C-4435-ADE3-5537F4B47B11}|VP_Baterija\\Service.csproj|solutionrelative:vp_baterija\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42D1827B-7F3C-4435-ADE3-5537F4B47B11}|VP_Baterija\\Service.csproj|c:\\users\\dimitrije\\documents\\github\\vp_projekat\\vp_baterija\\vp_baterija\\eisservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{42D1827B-7F3C-4435-ADE3-5537F4B47B11}|VP_Baterija\\Service.csproj|solutionrelative:vp_baterija\\eisservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{42D1827B-7F3C-4435-ADE3-5537F4B47B11}|VP_Baterija\\Service.csproj|D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\vp_baterija\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{42D1827B-7F3C-4435-ADE3-5537F4B47B11}|VP_Baterija\\Service.csproj|solutionrelative:vp_baterija\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C7F71300-90D0-412E-9E74-38CED9E0AC8C}|Client\\Client.csproj|c:\\users\\dimitrije\\documents\\github\\vp_projekat\\vp_baterija\\client\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{C7F71300-90D0-412E-9E74-38CED9E0AC8C}|Client\\Client.csproj|solutionrelative:client\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\common\\models\\eisfileprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\models\\eisfileprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|c:\\users\\dimitrije\\documents\\github\\vp_projekat\\vp_baterija\\common\\services\\analyticsconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\services\\analyticsconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\common\\models\\eisfiledata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\models\\eisfiledata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|c:\\users\\dimitrije\\documents\\github\\vp_projekat\\vp_baterija\\common\\services\\ibatteryeventpublisher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\services\\ibatteryeventpublisher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\common\\services\\disposablebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\services\\disposablebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|c:\\users\\dimitrije\\documents\\github\\vp_projekat\\vp_baterija\\common\\events\\warningeventargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\events\\warningeventargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\common\\models\\dataformatfault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\models\\dataformatfault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|c:\\users\\dimitrije\\documents\\github\\vp_projekat\\vp_baterija\\common\\events\\sampleeventargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\events\\sampleeventargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\common\\models\\eiscsvwriter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\models\\eiscsvwriter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\common\\models\\networkstreamwrapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\models\\networkstreamwrapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\common\\models\\eiscsvreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\models\\eiscsvreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|c:\\users\\dimitrije\\documents\\github\\vp_projekat\\vp_baterija\\common\\events\\transfereventargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B63827C7-BE54-4542-B428-FDA93B915D7E}|Common\\Common.csproj|solutionrelative:common\\events\\transfereventargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,131 +46,142 @@
       "DocumentGroups": [
         {
           "DockedHeight": 284,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\VP_Baterija\\Program.cs",
-              "RelativeDocumentMoniker": "VP_Baterija\\Program.cs",
-              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\VP_Baterija\\Program.cs",
-              "RelativeToolTip": "VP_Baterija\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-25T16:47:05.037Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EisService.cs",
-              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\VP_Baterija\\EisService.cs",
-              "RelativeDocumentMoniker": "VP_Baterija\\EisService.cs",
-              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\VP_Baterija\\EisService.cs",
-              "RelativeToolTip": "VP_Baterija\\EisService.cs",
-              "ViewState": "AgIAAIoAAAAAAAAAAAAWwJ4AAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-25T16:35:49.565Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Client\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Client\\Program.cs",
               "RelativeDocumentMoniker": "Client\\Program.cs",
-              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Client\\Program.cs",
+              "ToolTip": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Client\\Program.cs",
               "RelativeToolTip": "Client\\Program.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAwEIAAABcAAAAAAAAAA==",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAiwJEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-25T15:48:03.928Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EisFileData.cs",
-              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\EisFileData.cs",
-              "RelativeDocumentMoniker": "Common\\Models\\EisFileData.cs",
-              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\EisFileData.cs",
-              "RelativeToolTip": "Common\\Models\\EisFileData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAoAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "EisService.cs",
+              "DocumentMoniker": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\VP_Baterija\\EisService.cs",
+              "RelativeDocumentMoniker": "VP_Baterija\\EisService.cs",
+              "ToolTip": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\VP_Baterija\\EisService.cs",
+              "RelativeToolTip": "VP_Baterija\\EisService.cs",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAAuwMUAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-25T15:46:39.946Z"
+              "WhenOpened": "2025-09-26T15:00:27.052Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "EisFileProcessor.cs",
-              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\EisFileProcessor.cs",
-              "RelativeDocumentMoniker": "Common\\Models\\EisFileProcessor.cs",
-              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\EisFileProcessor.cs",
-              "RelativeToolTip": "Common\\Models\\EisFileProcessor.cs",
-              "ViewState": "AgIAAHoAAAAAAAAAAAAqwJYAAABqAAAAAAAAAA==",
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Client\\App.config",
+              "RelativeDocumentMoniker": "Client\\App.config",
+              "ToolTip": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Client\\App.config",
+              "RelativeToolTip": "Client\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-09-26T15:00:10.782Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\VP_Baterija\\App.config",
+              "RelativeDocumentMoniker": "VP_Baterija\\App.config",
+              "ToolTip": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\VP_Baterija\\App.config",
+              "RelativeToolTip": "VP_Baterija\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-09-26T14:59:55.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AnalyticsConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Common\\Services\\AnalyticsConfiguration.cs",
+              "RelativeDocumentMoniker": "Common\\Services\\AnalyticsConfiguration.cs",
+              "ToolTip": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Common\\Services\\AnalyticsConfiguration.cs",
+              "RelativeToolTip": "Common\\Services\\AnalyticsConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-25T15:45:23.057Z",
+              "WhenOpened": "2025-09-26T14:56:00.815Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IBatteryEventPublisher.cs",
+              "DocumentMoniker": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Common\\Services\\IBatteryEventPublisher.cs",
+              "RelativeDocumentMoniker": "Common\\Services\\IBatteryEventPublisher.cs",
+              "ToolTip": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Common\\Services\\IBatteryEventPublisher.cs",
+              "RelativeToolTip": "Common\\Services\\IBatteryEventPublisher.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T14:55:10.567Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "WarningEventArgs.cs",
+              "DocumentMoniker": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Common\\Events\\WarningEventArgs.cs",
+              "RelativeDocumentMoniker": "Common\\Events\\WarningEventArgs.cs",
+              "ToolTip": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Common\\Events\\WarningEventArgs.cs",
+              "RelativeToolTip": "Common\\Events\\WarningEventArgs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T14:54:51.42Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SampleEventArgs.cs",
+              "DocumentMoniker": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Common\\Events\\SampleEventArgs.cs",
+              "RelativeDocumentMoniker": "Common\\Events\\SampleEventArgs.cs",
+              "ToolTip": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Common\\Events\\SampleEventArgs.cs",
+              "RelativeToolTip": "Common\\Events\\SampleEventArgs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T14:54:17.793Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "NetworkStreamWrapper.cs",
-              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\NetworkStreamWrapper.cs",
-              "RelativeDocumentMoniker": "Common\\Models\\NetworkStreamWrapper.cs",
-              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\NetworkStreamWrapper.cs",
-              "RelativeToolTip": "Common\\Models\\NetworkStreamWrapper.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAA6wC4AAAAAAAAAAAAAAA==",
+              "Title": "TransferEventArgs.cs",
+              "DocumentMoniker": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Common\\Events\\TransferEventArgs.cs",
+              "RelativeDocumentMoniker": "Common\\Events\\TransferEventArgs.cs",
+              "ToolTip": "C:\\Users\\Dimitrije\\Documents\\GitHub\\vp_projekat\\VP_Baterija\\Common\\Events\\TransferEventArgs.cs",
+              "RelativeToolTip": "Common\\Events\\TransferEventArgs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T18:41:56.386Z"
+              "WhenOpened": "2025-09-26T14:53:46.224Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedHeight": 52,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "EisCsvWriter.cs",
-              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\EisCsvWriter.cs",
-              "RelativeDocumentMoniker": "Common\\Models\\EisCsvWriter.cs",
-              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\EisCsvWriter.cs",
-              "RelativeToolTip": "Common\\Models\\EisCsvWriter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T18:41:28.731Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "EisCsvReader.cs",
-              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\EisCsvReader.cs",
-              "RelativeDocumentMoniker": "Common\\Models\\EisCsvReader.cs",
-              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\EisCsvReader.cs",
-              "RelativeToolTip": "Common\\Models\\EisCsvReader.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T18:40:56.515Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DisposableBase.cs",
-              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Services\\DisposableBase.cs",
-              "RelativeDocumentMoniker": "Common\\Services\\DisposableBase.cs",
-              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Services\\DisposableBase.cs",
-              "RelativeToolTip": "Common\\Services\\DisposableBase.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T18:39:52.187Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "DataFormatFault.cs",
-              "DocumentMoniker": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\DataFormatFault.cs",
-              "RelativeDocumentMoniker": "Common\\Models\\DataFormatFault.cs",
-              "ToolTip": "D:\\Downloads\\Github\\vp_projekat\\VP_Baterija\\Common\\Models\\DataFormatFault.cs",
-              "RelativeToolTip": "Common\\Models\\DataFormatFault.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T18:14:27.604Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
             }
           ]
         }

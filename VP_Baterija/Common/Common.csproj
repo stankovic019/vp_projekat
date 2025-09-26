@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -43,14 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\SampleEventArgs.cs" />
+    <Compile Include="Events\TransferEventArgs.cs" />
+    <Compile Include="Events\WarningEventArgs.cs" />
     <Compile Include="Models\DataFormatFault.cs" />
-    <Compile Include="Models\EisCsvReader.cs" />
-    <Compile Include="Models\EisCsvWriter.cs" />
+    <Compile Include="Services\AnalyticsConfiguration.cs" />
+    <Compile Include="Services\EisCsvReader.cs" />
+    <Compile Include="Services\EisCsvWriter.cs" />
     <Compile Include="Models\EisFileData.cs" />
-    <Compile Include="Models\EisFileProcessor.cs" />
+    <Compile Include="Services\EisFileProcessor.cs" />
     <Compile Include="Models\EisMeta.cs" />
     <Compile Include="Models\EisSample.cs" />
-    <Compile Include="Models\NetworkStreamWrapper.cs" />
+    <Compile Include="Services\IBatteryEventPublisher.cs" />
+    <Compile Include="Services\NetworkStreamWrapper.cs" />
     <Compile Include="Models\ValidationFault.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DisposableBase.cs" />

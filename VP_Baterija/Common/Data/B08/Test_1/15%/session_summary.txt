@@ -1,0 +1,12 @@
+Battery Analysis Session Summary
+Generated: 2025-09-27 08:20:08
+
+Battery ID: B08
+Test ID: Test_1
+State of Charge: 15%
+Original File: Hk_IFR14500_SoC_15_24-03-2023_02-25.csv
+
+Declared (client) Samples: 28
+Accepted (success) Samples: 28
+Rejected Samples: 0
+Success Rate: 100.0%

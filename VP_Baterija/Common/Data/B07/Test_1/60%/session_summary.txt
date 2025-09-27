@@ -1,10 +1,10 @@
 Battery Analysis Session Summary
-Generated: 2025-09-26 17:08:26
+Generated: 2025-09-27 08:19:58
 
 Battery ID: B07
 Test ID: Test_1
 State of Charge: 60%
-Original File: 60.csv
+Original File: Hk_IFR14500_SoC_60_04-03-2023_00-52.csv
 
 Declared (client) Samples: 28
 Accepted (success) Samples: 28

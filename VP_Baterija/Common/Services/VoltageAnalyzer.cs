@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common.Services
 {
@@ -71,7 +69,7 @@ namespace Common.Services
                     var absoluteDeltaV = Math.Abs(deltaV);
 
                     Console.WriteLine($"Sample {currentSample.RowIndex}: V={currentSample.V:F4}V, " +
-                                    $"ΔV={deltaV:F6}V (|ΔV|={absoluteDeltaV:F6}V)");
+                                    $"dV={deltaV:F6}V (|dV|={absoluteDeltaV:F6}V)");
 
                     if (absoluteDeltaV > _voltageThreshold)
                     {
@@ -124,7 +122,7 @@ namespace Common.Services
                 var absoluteDeltaV = Math.Abs(deltaV);
 
                 Console.WriteLine($"Real-time voltage analysis: Sample {sample.RowIndex}, " +
-                                $"V={sample.V:F4}V, ΔV={deltaV:F6}V");
+                                $"V={sample.V:F4}V, dV={deltaV:F6}V");
 
                 if (absoluteDeltaV > _voltageThreshold)
                 {
@@ -162,7 +160,7 @@ namespace Common.Services
             Console.WriteLine($"Session: {e.SessionInfo.BatteryId}/{e.SessionInfo.TestId}/{e.SessionInfo.SoC}%");
             Console.WriteLine($"Between samples {e.PreviousSample.RowIndex} and {e.CurrentSample.RowIndex}");
             Console.WriteLine($"Voltage change: {e.PreviousSample.V:F4}V → {e.CurrentSample.V:F4}V");
-            Console.WriteLine($"ΔV = {e.DeltaV:F6}V (|ΔV| = {e.AbsoluteDeltaV:F6}V)");
+            Console.WriteLine($"dV = {e.DeltaV:F6}V (|dV| = {e.AbsoluteDeltaV:F6}V)");
             Console.WriteLine($"Threshold: {e.Threshold:F6}V");
             Console.WriteLine($"Direction: {e.Direction}");
             Console.WriteLine($"Detected at: {e.DetectedAt:HH:mm:ss.fff}");
@@ -187,8 +185,8 @@ namespace Common.Services
             Console.WriteLine($"Min voltage: {voltages.Min():F4}V");
             Console.WriteLine($"Max voltage: {voltages.Max():F4}V");
             Console.WriteLine($"Voltage range: {(voltages.Max() - voltages.Min()):F4}V");
-            Console.WriteLine($"Average |ΔV|: {deltaVs.Average():F6}V");
-            Console.WriteLine($"Max |ΔV|: {deltaVs.Max():F6}V");
+            Console.WriteLine($"Average |dV|: {deltaVs.Average():F6}V");
+            Console.WriteLine($"Max |dV|: {deltaVs.Max():F6}V");
             Console.WriteLine($"Spikes detected: {deltaVs.Count(dv => dv > _voltageThreshold)}");
             Console.WriteLine($"Spike threshold: {_voltageThreshold:F6}V");
             Console.WriteLine();
@@ -209,7 +207,7 @@ namespace Common.Services
                 Console.WriteLine($"Warning: Could not read V_threshold from config: {ex.Message}");
             }
 
-            return 0.001; 
+            return 0.001;
         }
 
         public void ClearHistory()

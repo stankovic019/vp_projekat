@@ -1,9 +1,5 @@
 ﻿using Common.Events;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common.Services
 {
@@ -13,5 +9,9 @@ namespace Common.Services
         event EventHandler<SampleEventArgs> OnSampleReceived;
         event EventHandler<TransferEventArgs> OnTransferCompleted;
         event EventHandler<WarningEventArgs> OnWarningRaised;
+        event EventHandler<VoltageSpikeEventArgs> OnVoltageSpikeRaised;
+        event EventHandler<ImpedanceJumpEventArgs> OnImpedanceJumpRaised;
+        event EventHandler<OutOfBandWarningEventArgs> OnOutOfBandWarningRaised;
+
     }
 }

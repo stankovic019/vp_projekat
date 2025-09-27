@@ -1,10 +1,5 @@
 ﻿using Common.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common.Services
 {
@@ -14,15 +9,15 @@ namespace Common.Services
         [OperationContract]
         [FaultContract(typeof(DataFormatFault))]
         [FaultContract(typeof(ValidationFault))]
-        void StartSession(EisMeta meta);
+        string StartSession(EisMeta meta);
 
         [OperationContract]
         [FaultContract(typeof(DataFormatFault))]
         [FaultContract(typeof(ValidationFault))]
-        void PushSample(EisSample sample);
+        string PushSample(EisSample sample);
 
         [OperationContract]
-        void EndSession();
+        string EndSession();
 
     }
 }

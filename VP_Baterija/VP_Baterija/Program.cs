@@ -1,10 +1,5 @@
-﻿using Common.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VP_Baterija
 {
@@ -12,13 +7,42 @@ namespace VP_Baterija
     {
         static void Main(string[] args)
         {
+            Console.Title = "Battery Analysis Server";
+            Console.WriteLine("=== Battery Li-ion Analysis Server ===");
 
-            ServiceHost svc = new ServiceHost(typeof(EisService));
+            ServiceHost svc = null;
 
-            svc.Open();
-            Console.WriteLine("Service is running... Press Enter to stop.");
+            try
+            {
+                svc = new ServiceHost(typeof(EisService));
+                svc.Open();
+
+                Console.WriteLine("Service started successfully!");
+                Console.WriteLine("Endpoint: net.tcp://localhost:4000/EisService");
+                Console.WriteLine("Ready to process battery data with real-time analytics");
+                Console.WriteLine();
+                Console.WriteLine("Press Enter to stop the server...");
+
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Server error: {ex.Message}");
+            }
+            finally
+            {
+                try
+                {
+                    svc?.Close();
+                    Console.WriteLine("Server stopped.");
+                }
+                catch
+                {
+                    svc?.Abort();
+                }
+            }
+
             Console.ReadLine();
-            
         }
     }
 }

@@ -49,7 +49,7 @@ public class EisFileProcessor
                 return eisFiles;
             }
 
-            // Traži sve Bxx foldere
+            //finding all Bxx folders
             var batteryDirs = Directory.GetDirectories(_datasetPath)
                 .Where(dir => IsBatteryDirectory(Path.GetFileName(dir)))
                 .OrderBy(dir => dir);
@@ -160,11 +160,11 @@ public class EisFileProcessor
 
         var patterns = new[]
         {
-            @"_(\d+)_",          
-            @"_(\d+)\.csv",       
-            @"^(\d+)_",           
-            @"(\d+)\.csv$",       
-            @"[^0-9](\d+)[^0-9]" 
+            @"_(\d+)_",
+            @"_(\d+)\.csv",
+            @"^(\d+)_",
+            @"(\d+)\.csv$",
+            @"[^0-9](\d+)[^0-9]"
         };
 
         foreach (var pattern in patterns)

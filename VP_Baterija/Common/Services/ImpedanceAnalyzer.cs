@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common.Services
 {
@@ -45,7 +43,7 @@ namespace Common.Services
             }
 
             Console.WriteLine($"\n=== Impedance Analysis for {sessionInfo.BatteryId}/{sessionInfo.TestId}/{sessionInfo.SoC}% ===");
-            Console.WriteLine($"Analyzing {samples.Count} samples with ΔZ threshold: {_impedanceThreshold}Ω");
+            Console.WriteLine($"Analyzing {samples.Count} samples with dZ threshold: {_impedanceThreshold}Ω");
 
             ResetRunningAverage();
             _impedanceHistory.Clear();
@@ -86,7 +84,7 @@ namespace Common.Services
                     var deltaZ = currentZ - previousZ;
                     var absoluteDeltaZ = Math.Abs(deltaZ);
 
-                    Console.WriteLine($"  ΔZ={deltaZ:F8}Ω (|ΔZ|={absoluteDeltaZ:F8}Ω)");
+                    Console.WriteLine($"  dZ={deltaZ:F8}Ω (|dZ|={absoluteDeltaZ:F8}Ω)");
 
                     if (absoluteDeltaZ > _impedanceThreshold)
                     {
@@ -197,10 +195,10 @@ namespace Common.Services
 
         private void CheckOutOfBandWarning(EisSample sample, double currentZ, double runningMean, EisMeta sessionInfo)
         {
-            if (_sampleCount < 2) return; 
+            if (_sampleCount < 2) return;
 
-            var lowerBound = runningMean * 0.75; 
-            var upperBound = runningMean * 1.25; 
+            var lowerBound = runningMean * 0.75;
+            var upperBound = runningMean * 1.25;
 
             Console.WriteLine($"  Out-of-band check: Z={currentZ:F6}Ω vs bounds [{lowerBound:F6}Ω, {upperBound:F6}Ω]");
 
@@ -246,7 +244,7 @@ namespace Common.Services
             Console.WriteLine($"Session: {e.SessionInfo.BatteryId}/{e.SessionInfo.TestId}/{e.SessionInfo.SoC}%");
             Console.WriteLine($"Between samples {e.PreviousSample.RowIndex} and {e.CurrentSample.RowIndex}");
             Console.WriteLine($"Impedance change: {e.PreviousZ:F6}Ω → {e.CurrentZ:F6}Ω");
-            Console.WriteLine($"ΔZ = {e.DeltaZ:F8}Ω (|ΔZ| = {e.AbsoluteDeltaZ:F8}Ω)");
+            Console.WriteLine($"dZ = {e.DeltaZ:F8}Ω (|dZ| = {e.AbsoluteDeltaZ:F8}Ω)");
             Console.WriteLine($"Threshold: {e.Threshold:F8}Ω");
             Console.WriteLine($"Direction: {e.Direction}");
             Console.WriteLine($"Detected at: {e.DetectedAt:HH:mm:ss.fff}");
@@ -288,8 +286,8 @@ namespace Common.Services
             Console.WriteLine($"Max impedance: {impedances.Max():F6}Ω");
             Console.WriteLine($"Running mean: {runningMean:F6}Ω");
             Console.WriteLine($"Impedance range: {(impedances.Max() - impedances.Min()):F6}Ω");
-            Console.WriteLine($"Average |ΔZ|: {deltaZs.Average():F8}Ω");
-            Console.WriteLine($"Max |ΔZ|: {deltaZs.Max():F8}Ω");
+            Console.WriteLine($"Average |dZ|: {deltaZs.Average():F8}Ω");
+            Console.WriteLine($"Max |dZ|: {deltaZs.Max():F8}Ω");
             Console.WriteLine($"Impedance jumps: {deltaZs.Count(dz => dz > _impedanceThreshold)}");
             Console.WriteLine($"Out-of-band samples: {outOfBandCount} (±25% from mean)");
             Console.WriteLine($"Jump threshold: {_impedanceThreshold:F8}Ω");
@@ -311,7 +309,7 @@ namespace Common.Services
                 Console.WriteLine($"Warning: Could not read Z_threshold from config: {ex.Message}");
             }
 
-            return 0.01; 
+            return 0.01;
         }
 
         public void ClearHistory()

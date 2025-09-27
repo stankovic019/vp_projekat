@@ -1,10 +1,10 @@
 Battery Analysis Session Summary
-Generated: 2025-09-26 17:08:26
+Generated: 2025-09-27 08:19:09
 
 Battery ID: B04
 Test ID: Test_1
 State of Charge: 40%
-Original File: 40.csv
+Original File: Hk_IFR14500_SoC_40_07-06-2023_22-52.csv
 
 Declared (client) Samples: 28
 Accepted (success) Samples: 28

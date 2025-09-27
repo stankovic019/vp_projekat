@@ -1,7 +1,7 @@
 ﻿using Common.Services;
+using System;
 using System.IO;
 using System.Text;
-using System;
 
 namespace Common.Models
 {
@@ -41,7 +41,7 @@ namespace Common.Models
         {
             ThrowIfDisposed();
             streamWriter?.WriteLine(line);
-            streamWriter?.Flush(); 
+            streamWriter?.Flush();
         }
 
         public void WriteEisSample(EisSample sample)
